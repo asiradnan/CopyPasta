@@ -5,7 +5,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("secret_key")
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = [".vercel.app","127.0.0.1"]
 INSTALLED_APPS = [
     'django.contrib.admin',
