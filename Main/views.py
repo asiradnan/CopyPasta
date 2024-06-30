@@ -11,14 +11,14 @@ def copy(request):
         key = request.POST.get("key")
         try:
             x = get_object_or_404(MainModel, key=key)
-            return render(request, "copy.html", {"data":x.data})
+            return render(request, "copy.html", {"data":x})
         except:
             return render(request, "copy.html", {"error":"Data not found"})
 
 def paste(request):
     if request.method == "POST":
         key = request.POST.get("key")
-        form = MainForm(request.POST)
+        form = MainForm(request.POST, request.FILES)
         if form.is_valid():
             x = form.save(commit=False)
             x.save()

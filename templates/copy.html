@@ -12,7 +12,8 @@
             {% if error %}     
                 <div class="alert alert-danger">{{error}}</div>
             {% else %} 
-                <div class="alert alert-success"><strong>Your data is: </strong>{{data}}</div>
+                <div class="alert alert-success"><strong>Your data is: </strong>{{data.data}}</div>
+                <div class="alert alert-success"><strong>Your data is: </strong><a href="{{data.file.url}}">{{data.file}}</a></div>
             {%endif%}
         </div>    
     </div>

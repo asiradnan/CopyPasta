@@ -16,7 +16,7 @@
 <body>
     <div class="container-fluid bg-light d-flex justify-content-center align-items-center center-container">
         <div class="w-50">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% load crispy_forms_tags %}
                 {{ form|crispy}}
