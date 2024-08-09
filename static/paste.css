@@ -76,6 +76,10 @@ textarea{
 }
 input[type="file"]{
     color: #D66502;
+   
+}
+input[type="file"]:focus{
+    outline: none;
 }
 ::file-selector-button{
     background-color: #FFBC63;

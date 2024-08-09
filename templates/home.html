@@ -18,7 +18,8 @@
         </div>
         <div id="formframe">
             <div id="frame1">
-                <div class="frame1">
+                <form method="post" action="/copy" class="frame1">
+                    {% csrf_token %}
                     <div class="fi">
                         <img src="{% static 'globeicon.png' %}">
                         <input type="text" name="key" placeholder="Data key">
@@ -27,9 +28,9 @@
                         <button type="submit">Copy</button>
                         <img src="{% static 'deviceicon.png' %}">
                     </div>
-                    
-                </div>
-                <div class="frame1">
+                </form>
+                <form method="post" action="/preEdit" class="frame1">
+                    {% csrf_token %}
                     <div class="fi">
                         <img src="{% static 'globeicon.png' %}">
                         <input type="text" name="key" placeholder="Data key">
@@ -38,7 +39,7 @@
                         <button type="submit">Edit</button>
                         <img src="{% static 'deviceicon.png' %}">
                     </div>
-                </div> 
+                </form>
             </div>
             <div id="frame2">
                 <a href="/paste">
