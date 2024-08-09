@@ -1,0 +1,126 @@
+body{
+    background-color: #FFE8C9;
+}
+#main{
+    display: grid;
+    grid-template-rows: 200px auto;
+    align-items: center;
+    height: 100%;
+}
+#logoframe{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    width: 40%;
+    margin: auto;
+}
+.logoelem2{
+    width: 200px;
+}
+.logoelem{
+    height: 150px;
+    width: 150px;
+}
+#limg1{
+    justify-self: right;    
+}
+#limg2{
+    justify-self: center;    
+}
+#limg3{
+    justify-self: left;    
+}
+#formframe{
+    margin: auto;
+    width: 50%;
+}
+#errorsdiv{
+    color: red;
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+}
+form{
+    display: grid;
+    grid-template-rows: 52px 200px 52px 10%;
+    gap: 20px;
+    height: 90%;
+}
+.errorlist{
+    display: none;
+}
+form div{
+    display: grid;
+    grid-template-columns: 20% 75%;
+    gap: 5%;
+}
+input[type="text"]{
+    width: 100%;
+    height: 44px;
+    font-size: 25px;
+    padding: 5px 10px 5px 10px;
+    background-color: #FFD092;
+    outline: 1px solid #FFFFFF;
+    box-shadow: 3px 1px 3px  #FFD092;
+    border: none;
+    font-family: sans-serif;
+}
+label{
+    border: 1px solid #D46E2B;
+    background-color: #FFD092;
+    font-size: 25px;
+    padding: 5px;
+    height: 32px;
+    text-align: center;
+    color: #36105E;
+}
+textarea{
+    background-color: #FFD092;
+    outline: 1px solid #FFFFFF;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+input[type="file"]{
+    color: #D66502;
+   
+}
+input[type="file"]:focus{
+    outline: none;
+}
+::file-selector-button{
+    background-color: #FFBC63;
+    height: 44px;
+    border: 1px solid #813E02;
+    width: 150px;
+    margin-right: 10px;
+}
+form button{
+    width: 200px;
+    justify-self: center;
+    background-color: #E78544;
+    border-color: #F7D0AA;
+    color: #3D1A62;
+}
+@media screen and (max-width:600px) {
+    .logoelem2{
+        width: 20px;
+    }
+    .logoelem{
+        width: 20px;
+        height: 20px;
+    }
+    #logoframe{
+        max-width: 100%;
+    }
+    #logoframe {
+        display: grid;
+        grid-template-columns: 20px 20px 20px;  /* Keep horizontal layout */
+        grid-gap: 10px;  /* Add spacing between images */
+        align-items: center;
+        justify-items: center;
+        width: 300px;
+        margin: 0 auto;
+    }
+}
