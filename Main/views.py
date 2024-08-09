@@ -51,7 +51,8 @@ def edit(request):
         key = request.POST.get("key")
         form = MainForm(request.POST, request.FILES,instance=obj)
         if form.is_valid():
-            form.save()
+            x = form.save(commit=False)
+            x.save()
             return render(request, "pasted.html",{"key":key})
         else:
             return render(request, "paste.html", {"form":form})

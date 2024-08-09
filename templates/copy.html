@@ -15,7 +15,7 @@
                 <div class="alert alert-danger">{{error}}</div>
             {% else %} 
                 <div class="alert alert-success"><strong>Your data is: </strong>{{data}}</div>
-                {% if file %} <div class="alert alert-success"><strong>Your data is: </strong><a href="{{file.url}}">{{data.file}}</a></div>
+                {% if file %} <div class="alert alert-success"><strong>Your data is: </strong><a href="{{file.url}}">{{file}}</a></div>
                 {% endif %}
             {%endif%}
         </div>    
