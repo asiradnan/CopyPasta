@@ -16,6 +16,7 @@
     </style>
 </head>
 <body>
+    
     <div id="main">
         <div id="logoframe">
             <img src="{% static 'globe.png' %}" class="logoelem" id="limg1">
@@ -23,10 +24,16 @@
             <img src="{% static 'device.png' %}" class="logoelem" id="limg3">
         </div>
         <div id="formframe">
+            {% if form.errors %}
+                <div id="errorsdiv">
+                    This key already exists. Choose another one.
+                </div> 
+            {% endif %}
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                
                 {{ form }}
-                <button class="btn btn-primary mt-2" type="submit">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     </div>

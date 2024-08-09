@@ -11,8 +11,10 @@ def copy(request):
     if request.method == "POST":
         key = request.POST.get("key")
         try:
-            x = get_object_or_404(MainModel, key=key)
-            return render(request, "copy.html", {"data":x})
+            x = MainModel.objects.get(key=key)
+            if (x.file):
+                return render(request, "copy.html", {"data":x,"file":x.file})
+            return render(request,"copy.html",{"data":x.data})
         except:
             return render(request, "copy.html", {"error":"Data not found"})
 
@@ -23,8 +25,10 @@ def paste(request):
         if form.is_valid():
             x = form.save(commit=False)
             x.save()
+            print("Here")
             return render(request, "pasted.html",{"key":key})
         else:
+            print(form)
             return render(request, "paste.html", {"form":form})
     form = MainForm()
     return render(request, "paste.html", {"form":form})

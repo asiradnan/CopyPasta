@@ -1,6 +1,5 @@
 body{
     background-color: #FFE8C9;
-
 }
 #main{
     display: grid;
@@ -33,13 +32,22 @@ body{
 }
 #formframe{
     margin: auto;
-     width: 50%;
+    width: 50%;
+}
+#errorsdiv{
+    color: red;
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
 }
 form{
     display: grid;
-    grid-template-rows: 52px 50% 12% 10%;
+    grid-template-rows: 52px 200px 52px 10%;
     gap: 20px;
     height: 90%;
+}
+.errorlist{
+    display: none;
 }
 form div{
     display: grid;
