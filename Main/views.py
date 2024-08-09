@@ -56,4 +56,4 @@ def edit(request):
         else:
             return render(request, "paste.html", {"form":form})
     form = MainForm(instance=obj)
-    return render(request, "paste.html", {"form":form})
+    return render(request, "edit.html", {"form":form})

@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="icon" href="{% static 'paste.png' %}">
+    <link rel="stylesheet" href="{% static 'paste.css' %}">
+    <title>Paste</title>
+    <style>
+        .center-container,body{
+            height: 100%;
+        }
+        .asteriskField {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="logoframe">
+            <img src="{% static 'globe.png' %}" class="logoelem" id="limg1">
+            <img src="{% static 'arrow.png' %}" class="logoelem2" id="limg2">
+            <img src="{% static 'device.png' %}" class="logoelem" id="limg3">
+        </div>
+        <div id="formframe">
+            {% if form.errors %}
+                <div id="errorsdiv">
+                    This key already exists. Choose another one.
+                </div> 
+            {% endif %}
+            <form method="post" enctype="multipart/form-data" id="form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        {{ field.label_tag }} 
+                        {% if field.id_for_label == "id_file" %} 
+                            <input type="file" name="file" id="id_file">
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -33,6 +33,7 @@ body{
 #formframe{
     margin: auto;
     width: 50%;
+    min-width: 700px;
 }
 #errorsdiv{
     color: red;
@@ -42,7 +43,7 @@ body{
 }
 form{
     display: grid;
-    grid-template-rows: 52px 200px 52px 10%;
+    grid-template-rows: auto 200px auto 10%;
     gap: 20px;
     height: 90%;
 }
