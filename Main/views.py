@@ -13,7 +13,7 @@ def copy(request):
         try:
             x = MainModel.objects.get(key=key)
             if (x.file):
-                return render(request, "copy.html", {"data":x,"file":x.file})
+                return render(request, "copy.html", {"data":x.data,"file":x.file})
             return render(request,"copy.html",{"data":x.data})
         except:
             return render(request, "copy.html", {"error":"Data not found"})
