@@ -18,11 +18,11 @@ body{
   justify-self: center;
 }
 .logoelem2{
-  width: 200px;
+  width: 135px;
 }
 .logoelem{
-  height: 150px;
-  width: 150px;
+  height: 120px;
+  width: 120px;
 }
 #limg1{
   justify-self: right;    
@@ -67,6 +67,7 @@ body{
   outline: none;
   font-size: 25px;
   color: #3A0146;
+  width: calc( 100% - 5px) ;
 }
 ::placeholder {
   color: #3A0146;
