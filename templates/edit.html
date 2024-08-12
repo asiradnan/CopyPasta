@@ -31,14 +31,22 @@
             <form method="post" enctype="multipart/form-data" id="form">
                 {% csrf_token %}
                 {% for field in form %}
-                    <div>
+                    
+                    {% if field.id_for_label == "id_file" %} 
+                    <div class="spdiv">
                         {{ field.label_tag }} 
-                        {% if field.id_for_label == "id_file" %} 
-                            <input type="file" name="file" id="id_file">
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
+                        <input type="file" name="file" id="id_file">
+                        <div>
+                            <input type="checkbox" name="file-clear" id="file-clear_id">
+                            <label for="file-clear_id" class="splab">Delete current item</label>
+                        </div>
                     </div>
+                    {% else %}
+                    <div> 
+                        {{ field.label_tag }} 
+                        {{ field }}
+                    </div>
+                    {% endif %}
                 {% endfor %}
                 <button type="submit">Submit</button>
             </form>

@@ -67,7 +67,32 @@ form div {
     grid-template-columns: 20% 75%;
     gap: 5%;
 }
-
+.spdiv{
+    display: grid;
+    grid-template-columns: 20% 40% 38%;
+    gap: 1%;
+}
+#file-clear_id{
+    height: 40px;
+    border: 1px solid #D46E2B;
+}
+.spdiv div{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 45px auto ;
+    column-gap: 3px;
+    height: 50px;
+}
+.splab{
+    border: unset; 
+    background-color: unset; 
+    font-size: 20px;
+    padding: unset;
+    height: unset;
+    text-align: unset; 
+    color: #36105E;
+    font-family: sans-serif;
+}
 input[type="text"] {
     width: 100%;
     height: 44px;
