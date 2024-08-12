@@ -188,7 +188,7 @@ form button {
     }
 
     form {
-        grid-template-rows: 80px 200px 80px auto; 
+        grid-template-rows: 80px 200px 120px auto; 
         gap: 15px; 
     }
 
@@ -216,6 +216,12 @@ form button {
 
 /* Media Query for screens smaller than 480px (Phones) */
 @media (max-width: 480px) {
+    #main {
+        display: grid;
+        grid-template-rows: 150px auto;
+        align-items: center;
+        height: 100%;
+    }
     .logoelem2, .logoelem {
         width: 80px; /* Further reduce logo size */
         height: auto; /* Adjust height */
@@ -245,5 +251,30 @@ form button {
     form div {
         grid-template-columns: 1fr; /* Stack fields */
         gap: 5px; /* Adjust gap */
+    }
+    .spdiv{
+        grid-template-columns: 1fr; /* Stack fields */
+        gap: 5px; /* Adjust gap */
+    }
+    #file-clear_id{
+        height: 40px;
+        border: 1px solid #D46E2B;
+    }
+    .spdiv div{
+        display: grid;
+        align-items: center;
+        grid-template-columns: 45px auto ;
+        column-gap: 3px;
+        height: 50px;
+    }
+    .splab{
+        border: unset; 
+        background-color: unset; 
+        font-size: 20px;
+        padding: unset;
+        height: unset;
+        text-align: unset; 
+        color: #36105E;
+        font-family: sans-serif;
     }
 }
