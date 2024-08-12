@@ -188,7 +188,7 @@ button:focus{
     outline: none;
     font-size: 25px;
     color: #3A0146;
-    width: 50px;
+    width: calc( 100% - 5px) ;
   }
   ::placeholder {
     color: #3A0146;
