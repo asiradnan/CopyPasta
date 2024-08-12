@@ -125,13 +125,11 @@ body{
 button:focus{
   outline: none;
 }
-/* Media Query for screens smaller than 768px (Tablets and Phones) */
-
 
 /* Media Query for screens smaller than 480px (Phones) */
 @media (max-width: 480px) {
   #main{
-    grid-template-rows: 100px auto;
+    grid-template-rows: 180px auto;
   }
   #logoframe{
     display: grid;
@@ -158,7 +156,7 @@ button:focus{
   }
   #formframe{
     display: grid;
-    grid-template-rows: 65% 35%;
+    grid-template-rows: 50% 40% 10%;
     height: 100%;
   }
   #frame1{
@@ -179,13 +177,13 @@ button:focus{
     display: grid;
     grid-template-columns: 45px auto;
     gap:10px;
-    background-color: #C96BFF;
+    background-color: #c96bffd5;
     border: 3px solid #FFFFFF;
     height: 50px;
     align-items: center;
   }
   .fi input{
-    background-color: #C96BFF;
+    background-color: #c96bffd5;
     border: none;
     outline: none;
     font-size: 25px;
@@ -204,7 +202,7 @@ button:focus{
     height: 56px;
     width: 70px;
     background-color: #FFFFFF;
-    border: 5px solid #C96BFF;
+    border: 5px solid #c96bffd5;
     margin: 0;
   }
   .fb{
@@ -244,7 +242,7 @@ button:focus{
     align-items: center;
   }
   #frame2 button{
-    background-color: #9F19C0;
+    background-color: #9f19c0b6;
     border: 3px solid #FFFFFF;
     height: 50px;
     width: 100%;
