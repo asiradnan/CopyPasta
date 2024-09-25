@@ -9,7 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("secret_key")
 DEBUG = False
-ALLOWED_HOSTS = ["copypaste.asiradnan.com","127.0.0.1"]
+ALLOWED_HOSTS = ["copypasta.asiradnan.com","www.copypasta.asiradnan.com"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,11 +49,11 @@ WSGI_APPLICATION = 'CopyPaste.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
+        'NAME': 'copypasta_db',
         'USER':'postgres',
-        'PASSWORD': os.environ.get('dbpass'),
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '24653'
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 LANGUAGE_CODE = 'en-us'
@@ -64,9 +64,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join("staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
+MEDIA_URL = "media/"
+MEDIA_ROOT = os.path.join("mediafiles")

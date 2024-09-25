@@ -1,4 +1,4 @@
-# Link: https://copypaste.asiradnan.com
+# Link: https://copypasta.asiradnan.com
 ## Why and what
 Ever found yourself in a scenario where you have to transfer something (a file or a text) from your phone to the Desktop just in front of you? It’s a very common scenario in our university printing lab though!
 If you are not carrying a USB cable, it requires you to connect both devices either by installing a software (takes a lot of time) or you have to login to one of your social media accounts by typing credentials and then maybe completing 2 step verification! If you forget to logout before leaving, it’s very risky in a publicly available computer at your campus or office. Also even if you check all of them it’s a whole lot of work for a simple task right?
