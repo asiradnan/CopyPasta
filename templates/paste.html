@@ -5,16 +5,255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="icon" href="{% static 'paste.png' %}">
-    <link rel="stylesheet" href="{% static 'paste.css' %}">
     <title>Paste</title>
     <style>
-        .center-container,
-        body {
-            height: 100%;
+        body,
+        .center-container {
+            height: 97vh;
+            background-color: #FFE8C9;
         }
 
         .asteriskField {
             display: none;
+        }
+
+        #main {
+            display: grid;
+            grid-template-rows: 35% auto;
+            align-items: center;
+            height: 100%;
+        }
+
+        #logoframe {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            align-items: center;
+            width: 40%;
+            margin: auto;
+        }
+
+        .logoelem2 {
+            width: 200px;
+        }
+
+        .logoelem {
+            height: 150px;
+            width: 150px;
+        }
+
+        #limg1 {
+            justify-self: right;
+        }
+
+        #limg2 {
+            justify-self: center;
+        }
+
+        #limg3 {
+            justify-self: left;
+        }
+
+        #formframe {
+            margin: auto;
+            width: 50%;
+            min-width: 700px;
+        }
+
+        #errorsdiv {
+            color: red;
+            margin: auto;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        form {
+            display: grid;
+            grid-template-rows: 20% 40% 20% 10%;
+            gap: 20px;
+            height: 90%;
+        }
+
+        .errorlist {
+            display: none;
+        }
+
+        form div {
+            display: grid;
+            grid-template-columns: 20% 75%;
+            gap: 5%;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 44px;
+            font-size: 25px;
+            padding: 5px 10px;
+            background-color: #FFD092;
+            outline: 1px solid #FFFFFF;
+            box-shadow: 3px 1px 3px #FFD092;
+            border: none;
+            font-family: sans-serif;
+        }
+
+        label {
+            border: 1px solid #D46E2B;
+            background-color: #FFD092;
+            font-size: 25px;
+            padding: 5px;
+            height: 32px;
+            text-align: center;
+            color: #36105E;
+        }
+
+        textarea {
+            background-color: #FFD092;
+            outline: 1px solid #FFFFFF;
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            font-family: sans-serif;
+        }
+
+        input[type="file"] {
+            color: #D66502;
+        }
+
+        input[type="file"]:focus {
+            outline: none;
+        }
+
+        ::file-selector-button {
+            background-color: #FFBC63;
+            height: 44px;
+            border: 1px solid #813E02;
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        form button {
+            width: 200px;
+            justify-self: center;
+            background-color: #E78544;
+            border-color: #F7D0AA;
+            color: #3D1A62;
+        }
+
+        /* Media Query for screens smaller than 992px (Larger Tablets and Small Laptops) */
+        @media (max-width: 992px) {
+            #logoframe {
+                width: 60%;
+            }
+
+            #formframe {
+                width: 70%;
+                min-width: 600px;
+            }
+
+            form {
+                grid-template-rows: 50px minmax(100px, 450px) 50px 60px;
+                row-gap: 20px;
+            }
+
+            input[type="text"],
+            textarea {
+                font-size: 20px;
+                /* Adjust font size */
+            }
+
+            textarea {
+                height: auto;
+            }
+
+            label {
+                font-size: 20px;
+                height: 30px;
+            }
+
+            form button {
+                width: 250px;
+            }
+        }
+
+        /* Media Query for screens smaller than 768px (Tablets and Phones) */
+        @media (max-width: 768px) {
+            #logoframe {
+                width: 100%;
+            }
+
+            .logoelem2,
+            .logoelem {
+                width: 100px;
+            }
+
+            #formframe {
+                width: 100%;
+                min-width: 400px;
+            }
+
+            form {
+                grid-template-rows: 30px minmax(50px, 250px) 30px 40px;
+                row-gap: 20px;
+            }
+
+            input,
+            textarea {
+                font-size: 18px;
+                height: auto;
+            }
+
+            ::file-selector-button {
+                height: 100%;
+            }
+
+            label {
+                font-size: 18px;
+                height: 20px;
+            }
+
+            form button {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .logoelem2,
+            .logoelem {
+                width: 80px;
+            }
+
+            input,
+            textarea {
+                font-size: 16px;
+                height: auto;
+            }
+
+            input[type="file"] {
+                max-width: 250px;
+            }
+
+            input[type="text"] {
+                height: 30px;
+            }
+
+            form {
+                gap: 15px 10px;
+            }
+
+            form button {
+                font-size: 16px;
+                width: 80%;
+            }
+
+            #formframe {
+                width: 100%;
+                min-width: 50px;
+                max-width: 100%;
+            }
+
+            label {
+                height: 20px;
+            }
         }
     </style>
 </head>
@@ -47,10 +286,11 @@
                     <label for="id_file">File:</label>
                     <input type="file" name="file" id="id_file">
                 </div>
-                
+
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
 </body>
+
 </html>
