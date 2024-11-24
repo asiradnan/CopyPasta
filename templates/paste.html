@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,19 @@
     <link rel="stylesheet" href="{% static 'paste.css' %}">
     <title>Paste</title>
     <style>
-        .center-container,body{
+        .center-container,
+        body {
             height: 100%;
         }
+
         .asteriskField {
             display: none;
         }
     </style>
 </head>
+
 <body>
-    
+
     <div id="main">
         <div id="logoframe">
             <img src="{% static 'device.png' %}" class="logoelem" id="limg1">
@@ -25,14 +29,25 @@
         </div>
         <div id="formframe">
             {% if form.errors %}
-                <div id="errorsdiv">
-                    This key already exists. Choose another one.
-                </div> 
+            <div id="errorsdiv">
+                This key already exists. Choose another one.
+            </div>
             {% endif %}
             <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+                {%csrf_token%}
+                <div>
+                    <label for="id_key">Key:</label>
+                    <input type="text" name="key" maxlength="20" required id="id_key" placeholder="newsecret_123">
+                </div>
+                <div>
+                    <label for="id_data">Data:</label>
+                    <textarea name="data" cols="40" rows="10" required id="id_data"></textarea>
+                </div>
+                <div>
+                    <label for="id_file">File:</label>
+                    <input type="file" name="file" id="id_file">
+                </div>
                 
-                {{ form }}
                 <button type="submit">Submit</button>
             </form>
         </div>

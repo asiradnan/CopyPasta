@@ -9,7 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("secret_key")
 DEBUG = False
-ALLOWED_HOSTS = ["copypasta.asiradnan.com","www.copypasta.asiradnan.com"]
+ALLOWED_HOSTS = ["copypasta.asiradnan.com","www.copypasta.asiradnan.com","*"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,16 +46,16 @@ TEMPLATES = [
     },
 ]
 WSGI_APPLICATION = 'CopyPaste.wsgi.application'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'copypasta_db',
-        'USER':'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'copypasta_db',
+#         'USER':'postgres',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
