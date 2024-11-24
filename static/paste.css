@@ -4,7 +4,7 @@ body {
 
 #main {
     display: grid;
-    grid-template-rows: 200px auto;
+    grid-template-rows: 35% auto;
     align-items: center;
     height: 100%;
 }
@@ -53,7 +53,7 @@ body {
 
 form {
     display: grid;
-    grid-template-rows: auto 200px auto 10%;
+    grid-template-rows: 20% 40% 20% 10%;
     gap: 20px;
     height: 90%;
 }
@@ -125,13 +125,6 @@ form button {
 
 /* Media Query for screens smaller than 992px (Larger Tablets and Small Laptops) */
 @media (max-width: 992px) {
-    #main {
-        display: grid;
-        grid-template-rows: 300px auto;
-        align-items: center;
-        height: 100%;
-    }
-
     #logoframe {
         width: 60%;
     }
@@ -156,7 +149,7 @@ form button {
     }
 
     form button {
-        width: 150px; /* Adjust button width */
+        width: 250px;
     }
 }
 
@@ -192,7 +185,7 @@ form button {
     }
 
     form button {
-        width: 100%; 
+        width: 200px; 
     }
 }
 
@@ -219,7 +212,8 @@ form button {
 
     #formframe {
         width: 100%; 
-        min-width: unset;
+        min-width: 50px;
+        max-width: 100%;
     }
     label{
         height: 20px;
