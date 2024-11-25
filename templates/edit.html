@@ -1,20 +1,262 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="icon" href="{% static 'paste.png' %}">
-    <link rel="stylesheet" href="{% static 'paste.css' %}">
     <title>Paste</title>
     <style>
-        .center-container,body{
+        body,
+        .center-container {
+            height: 97vh;
+            background-color: #FFE8C9;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            color: #36105E;
+        }
+
+        #main {
+            display: grid;
+            grid-template-rows: 35% auto;
+            grid-template-columns: 100%;
+            align-items: center;
+            justify-items: center;
+            width: 100%;
             height: 100%;
         }
-        .asteriskField {
-            display: none;
+
+        #logoframe {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            margin: auto;
+        }
+
+        .logoelem2 {
+            width: 200px;
+        }
+    
+        .logoelem {
+            height: 150px;
+            width: 150px;
+        }
+
+        #formframe {
+            width: 80%;
+            max-width: 700px;
+            background-color: transparent;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        #errorsdiv {
+            color: #D70000;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        form {
+            display: grid;
+            grid-template-rows: 15% 35% 25% auto;
+            gap: 15px;
+        }
+
+        form div {
+            display: grid;
+            grid-template-columns: 15% 80%;
+            gap: 5%;
+        }
+
+        input[type="text"],
+        textarea {
+            height: 44px;
+            font-size: 18px;
+            padding: 10px;
+            background-color: #FFE3B9;
+            border: 2px solid #D46E2B;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #E78544;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        label {
+            background-color: #FFD092;
+            font-size: 20px;
+            padding: 8px;
+            text-align: center;
+            color: #36105E;
+            border-radius: 8px;
+            font-weight: bold;
+            border: 2px solid #D46E2B;
+            height: 20px;
+        }
+
+        input[type="file"] {
+            color: #D66502;
+            font-family: 'Roboto', sans-serif;
+            padding: 8px;
+        }
+
+        #file_upload_div{
+            grid-template-rows: 50% 50%;
+            align-items: center;
+        }
+
+        ::file-selector-button {
+            background-color: #FFBC63;
+            height: 36px;
+            border: 2px solid #813E02;
+            color: #36105E;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            padding: 0 12px;
+            transition: background-color 0.3s;
+        }
+
+        ::file-selector-button:hover {
+            background-color: #D46E2B;
+        }
+
+        input[type="checkbox"]{
+            height: 40px;
+
+        }
+
+        form button {
+            width: 250px;
+            justify-self: center;
+            background-color: #E78544;
+            border: 2px solid #F7D0AA;
+            color: #3D1A62;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #D46E2B;
+            transform: scale(1.05);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            #logoframe {
+                width: 100%;
+            }
+
+            .logoelem2,
+            .logoelem {
+                width: 100px;
+            }
+
+            #formframe {
+                width: 100%;
+                min-width: 400px;
+            }
+
+            input[type="text"],
+            textarea {
+                font-size: 16px;
+                padding: 8px;
+            }
+
+            form button {
+                font-size: 14px;
+                padding: 10px;
+                width: 180px;
+            }
+
+            label {
+                font-size: 14px;
+                padding: 6px;
+            }
+        }
+        #delete_checkbox_div{
+            grid-template-columns: 40px 300px auto;
+            gap: 5px; 
+            align-items: center;
+        }
+        @media (max-width: 480px) {
+            #delete_checkbox_div{
+                grid-template-columns: 40px 200px auto;
+            }
+            .logoelem2,
+            .logoelem {
+                width: 80px;
+            }
+
+            #formframe {
+                width: 100%;
+                min-width: 50px;
+                padding: 0;
+            }
+
+            form div{
+                width: 95%;
+            }
+
+            input[type="text"],
+            textarea {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            input[type="file"] {
+                max-width: 250px;
+            }
+
+            form div{
+                gap: 10px;
+            }
+            form {
+                justify-items: center;
+                gap: 15px;
+            }
+
+            form button {
+                font-size: 14px;
+                padding: 10px;
+                width: 150px;
+            }
+
+
+            label {
+                font-size: 14px;
+                padding: 6px;
+            }
+            #delete_checkbox_div label{
+                max-width: fit-content;
+            }
+        }
+        @media (min-width: 600px) {
+            #main{
+                justify-content: center;
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="main">
         <div id="logoframe">
@@ -24,33 +266,36 @@
         </div>
         <div id="formframe">
             {% if form.errors %}
-                <div id="errorsdiv">
-                    This key already exists. Choose another one.
-                </div> 
+            <div id="errorsdiv">
+                This key already exists. Choose another one.
+            </div>
             {% endif %}
             <form method="post" enctype="multipart/form-data" id="form">
                 {% csrf_token %}
-                {% for field in form %}
-                    
-                    {% if field.id_for_label == "id_file" %} 
-                    <div class="spdiv">
-                        {{ field.label_tag }} 
-                        <input type="file" name="file" id="id_file">
-                        <div>
+                <div>
+                    <label for="id_key">Key:</label>
+                    <input type="text" name="key" maxlength="20" required id="id_key" value="{{form.key.value}}">
+                </div>
+                <div>
+                    <label for="id_data">Data:</label>
+                    <textarea name="data" cols="40" rows="10" id="id_data">{{form.data.value}}</textarea>
+                </div>
+                <div id="file_upload_div">
+                    <label for="id_file">File:</label>
+                    <input type="file" name="file" id="id_file">
+                    <div></div>
+                    <div>
+                        <div id="delete_checkbox_div" >
                             <input type="checkbox" name="file-clear" id="file-clear_id">
-                            <label for="file-clear_id" class="splab">Delete current item</label>
+                            <label for="file-clear_id">Delete previous item</label>
                         </div>
                     </div>
-                    {% else %}
-                    <div> 
-                        {{ field.label_tag }} 
-                        {{ field }}
-                    </div>
-                    {% endif %}
-                {% endfor %}
-                <button type="submit">Submit</button>
+                </div>
+                
+                <button type="submit">Confirm</button>
             </form>
         </div>
     </div>
 </body>
+
 </html>
