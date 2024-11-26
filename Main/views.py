@@ -39,7 +39,6 @@ def preEdit(request):
         key = request.POST.get("key")
         try:
             x = get_object_or_404(MainModel, key=key)
-            print(x)
             request.session['key'] = key 
             return redirect(reverse('edit'))
         except:

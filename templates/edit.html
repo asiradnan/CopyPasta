@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="icon" href="{% static 'paste.png' %}">
-    <title>Paste</title>
+    <title>Edit</title>
     <style>
         body,
         .center-container {
@@ -296,6 +295,17 @@
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById("id_file").addEventListener("change", function () {
+            const deleteCheckbox = document.getElementById("file-clear_id");
+    
+            if (this.files.length > 0) { 
+                deleteCheckbox.checked = false;
+                deleteCheckbox.disabled = true;
+            } else {
+                deleteCheckbox.disabled = false;
+            }
+        });
+    </script>
 </body>
-
 </html>
