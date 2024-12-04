@@ -106,7 +106,7 @@
                 <pre>{{ data }}</pre> <!-- Allows multi-line data to display neatly -->
             </div>
             {% if file %}
-            <p>Your file is: <a href="{{ file.url }}" class="file-link">{{ file }}</a></p>
+            <p>Your file is: <a href="{{ file.url }}" target="_blank" file-link">{{ file }}</a></p>
             {% endif %}
         {% endif %}
         <a href="/" class="btn btn-primary">Go Back to Home</a>
