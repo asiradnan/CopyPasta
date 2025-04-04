@@ -17,7 +17,7 @@ Transferring files or text between devices can be unnecessarily complicated. Pub
 4. **No Installations Needed:** Works directly in the browser without extra software.
 
 ## Technologies Used
-- **Backend:** Django
+- **Backend:** Django  
 - **Frontend:** HTML, CSS
 
 ## Get Started
@@ -28,3 +28,8 @@ Transferring files or text between devices can be unnecessarily complicated. Pub
 
 ### Simplify your file and text transfers with **CopyPasta**! 🚀
 
+---
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/asiradnan/copypasta/blob/main/LICENSE).
