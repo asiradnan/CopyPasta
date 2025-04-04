@@ -1,20 +1,30 @@
-# Link: https://copypasta.asiradnan.com
-## Why and what
-Ever found yourself in a scenario where you have to transfer something (a file or a text) from your phone to the Desktop just in front of you? It’s a very common scenario in our university printing lab though!
-If you are not carrying a USB cable, it requires you to connect both devices either by installing a software (takes a lot of time) or you have to login to one of your social media accounts by typing credentials and then maybe completing 2 step verification! If you forget to logout before leaving, it’s very risky in a publicly available computer at your campus or office. Also even if you check all of them it’s a whole lot of work for a simple task right?
+# CopyPasta
 
-To do the simple task in a simple manner, I made this website which is free to use. Simply visit this site from one device and paste the file or text. Visit the site from other device to copy using the key that you have set. You can set the key in a way that it’s easier to remember for you and also harder to guess by anyone else just like your password (in case you don't want anyone else to look into your file or text).
+Ever needed to quickly transfer text or files between your phone and a desktop without the hassle of cables, software installations, or risky logins? **CopyPasta** makes it simple.
 
-For even a better security, after downloading the file or copying the text you can delete the text and file so that even if one guesses your key, the file and text are no longer there!
+## Why CopyPasta?
+Transferring files or text between devices can be unnecessarily complicated. Public computers, like those in a university printing lab, add security risks if you forget to log out. Traditional methods require too much effort for a simple task.
 
-You can use the same key again and again by using the edit option. If you upload a new file, it will replace the previous one, or store some new text. This way you don't have to use a new key every time ;)
+**CopyPasta is a free and easy solution.**
+- Open the site on one device, paste your text or file.
+- Access it from another device using your chosen key.
+- Edit or delete the content anytime for added security.
 
-In short,
+## Key Features
+1. **Quick Transfers:** Paste on one device, retrieve from another with your custom key.
+2. **Secure & Private:** Delete your content after use to prevent unauthorized access.
+3. **Persistent Keys:** Use the same key repeatedly to update or replace content.
+4. **No Installations Needed:** Works directly in the browser without extra software.
 
-1. Paste from one device, copy from another with your self chosen key.
+## Technologies Used
+- **Backend:** Django
+- **Frontend:** HTML, CSS
 
-2. Edit or delete text whenever and however you want.
+## Get Started
+1. Visit **[CopyPasta](https://copypasta.asiradnan.com)**.
+2. Paste your text or upload a file.
+3. Use your chosen key to access it from another device.
+4. Delete or edit content as needed.
 
-## Techs:
-1. Django
-2. HTML, CSS
+### Simplify your file and text transfers with **CopyPasta**! 🚀
+
