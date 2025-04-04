@@ -5,301 +5,347 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="icon" href="{% static 'paste.png' %}">
-    <title>Paste</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <title>Create New Paste | Copypasta</title>
     <style>
-        body,
-        .center-container {
-            height: 97vh;
-            background-color: #FFE8C9;
-            font-family: 'Roboto', sans-serif;
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5A52D9;
+            --primary-light: #E9E8FF;
+            --white: #FFFFFF;
+            --text: #2D3748;
+            --gray-light: #F7FAFC;
+            --error: #E53E3E;
+            --error-light: #FED7D7;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
         }
-    
-        .asteriskField {
-            display: none;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    
-        #main {
-            display: grid;
-            grid-template-rows: 35% auto;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F6F0FF 0%, #E9E8FF 100%);
+            min-height: 100vh;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            height: 100%;
+            padding: 20px;
         }
-    
-        #logoframe {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            align-items: center;
-            /* justify-content: center; */
-            width: 40%;
-            margin: auto;
-        }
-    
-        .logoelem2 {
-            width: 200px;
-        }
-    
-        .logoelem {
-            height: 150px;
-            width: 150px;
-        }
-    
-        #limg1 {
-            justify-self: right;
-        }
-    
-        #limg2 {
-            justify-self: center;
-        }
-    
-        #limg3 {
-            justify-self: left;
-        }
-    
-        #formframe {
-            margin: auto;
-            width: 50%;
-            min-width: 700px;
-        }
-    
-        #errorsdiv {
-            color: #D70000;
-            margin: auto;
+
+        .header {
+            margin: 40px 0 30px;
             text-align: center;
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-            font-weight: bold;
         }
-    
+
+        .logo {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 400px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            padding: 20px;
+            background-color: var(--primary-light);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .error-message {
+            background-color: var(--error-light);
+            color: var(--error);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-align: center;
+        }
+
         form {
-            display: grid;
-            grid-template-rows: 20% 40% 20% 10%;
+            display: flex;
+            flex-direction: column;
             gap: 20px;
-            height: 90%;
         }
-    
-        .errorlist {
-            display: none;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
-    
-        form div {
-            display: grid;
-            grid-template-columns: 20% 75%;
-            gap: 5%;
-        }
-    
-        input[type="text"] {
-            max-width: 100%;
-            height: 44px;
-            font-size: 20px;
-            padding: 10px;
-            background-color: #FFD092;
-            border: 2px solid #D46E2B;
-            border-radius: 8px;
-            font-family: 'Roboto', sans-serif;
-        }
-    
+
         label {
-            border: 2px solid #D46E2B;
-            background-color: #FFD092;
-            font-size: 20px;
-            padding: 5px;
-            height: 32px;
-            text-align: center;
-            color: #36105E;
-            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text);
         }
-    
-        textarea {
-            background-color: #FFD092;
-            border: 2px solid #D46E2B;
-            border-radius: 8px;
-            font-size: 18px;
-            padding: 10px;
-            font-family: 'Roboto', sans-serif;
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E2E8F0;
+            border-radius: var(--radius);
+            font-size: 16px;
+            color: var(--text);
+            background-color: var(--gray-light);
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
-    
-        input[type="file"] {
-            color: #D66502;
-            font-family: 'Roboto', sans-serif;
-        }
-    
-        input[type="file"]:focus {
+
+        input:focus, textarea:focus {
             outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
         }
-    
-        ::file-selector-button {
-            background-color: #FFBC63;
-            height: 44px;
-            border: 2px solid #813E02;
-            color: #36105E;
-            width: 150px;
-            margin-right: 10px;
-            border-radius: 8px;
-            font-family: 'Roboto', sans-serif;
+
+        input::placeholder, textarea::placeholder {
+            color: #A0AEC0;
         }
-    
-        form button {
-            width: 200px;
-            justify-self: center;
-            background-color: #E78544;
-            border: 2px solid #F7D0AA;
-            color: #3D1A62;
-            font-size: 18px;
-            font-family: 'Roboto', sans-serif;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
         }
-    
-        form button:hover {
-            background-color: #D46E2B;
+
+        .file-input-wrapper {
+            position: relative;
         }
-    
-        /* Media Queries */
-        @media (max-width: 992px) {
-            #logoframe {
-                width: 60%;
-            }
-    
-            #formframe {
-                width: 70%;
-                min-width: 600px;
-            }
-    
-            form {
-                grid-template-rows: 50px minmax(100px, 450px) 50px 60px;
-                row-gap: 20px;
-            }
-    
-            input[type="text"],
-            textarea {
-                font-size: 18px;
-            }
-    
-            label {
-                font-size: 18px;
-                height: 30px;
-            }
-    
-            form button {
-                width: 250px;
-            }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--gray-light);
+            border: 2px solid #E2E8F0;
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-    
+
+        .file-input-label:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .file-input-label span {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .file-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13'%3E%3C/path%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13'%3E%3C/path%3E%3C/svg%3E");
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            align-self: center;
+            min-width: 150px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .back-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: currentColor;
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 19l-7-7m0 0l7-7m-7 7h18'%3E%3C/path%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10 19l-7-7m0 0l7-7m-7 7h18'%3E%3C/path%3E%3C/svg%3E");
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        /* Mobile styles */
         @media (max-width: 768px) {
-            #logoframe {
-                width: 100%;
+            .header {
+                margin: 20px 0;
             }
-    
-            .logoelem2,
-            .logoelem {
-                width: 100px;
+            
+            .logo {
+                font-size: 32px;
             }
-    
-            #formframe {
-                width: 100%;
-                min-width: 400px;
+            
+            .card {
+                border-radius: 10px;
             }
-    
+            
             form {
-                grid-template-rows: auto minmax(50px, 250px) 30px 40px;
-                row-gap: 20px;
+                gap: 16px;
             }
-    
-            input,
-            textarea {
-                font-size: 16px;
-            }
-    
-            ::file-selector-button {
-                height: 100%;
-            }
-    
-            label {
-                font-size: 16px;
-                height: 20px;
-            }
-    
-            form button {
-                width: 200px;
-            }
-        }
-    
-        @media (max-width: 480px) {
-            .logoelem2,
-            .logoelem {
-                width: 80px;
-            }
-    
-            input,
-            textarea {
-                font-size: 14px;
-            }
-    
-            input[type="file"] {
-                max-width: 250px;
-            }
-    
-            input[type="text"] {
-                height: 30px;
-            }
-    
-            form {
-                gap: 15px 10px;
-            }
-    
-            form button {
-                font-size: 14px;
-                width: 80%;
-            }
-    
-            #formframe {
+            
+            .btn {
                 width: 100%;
-                min-width: 50px;
-            }
-    
-            label {
-                height: 20px;
             }
         }
     </style>
-    
-    
 </head>
 
 <body>
+    <div class="header">
+        <a href="/" class="logo">Copypasta</a>
+        <p class="tagline">Create a new paste to share with others</p>
+    </div>
 
-    <div id="main">
-        <div id="logoframe">
-            <img src="{% static 'device.png' %}" class="logoelem" id="limg1">
-            <img src="{% static 'arrow.png' %}" class="logoelem2" id="limg2">
-            <img src="{% static 'globe.png' %}" class="logoelem" id="limg3">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Create New Paste</h2>
         </div>
-        <div id="formframe">
+        <div class="card-body">
             {% if form.errors %}
-            <div id="errorsdiv">
-                This key already exists. Choose another one.
+            <div class="error-message">
+                This key already exists. Please choose another one.
             </div>
             {% endif %}
+
             <form method="post" enctype="multipart/form-data">
-                {%csrf_token%}
-                <div>
-                    <label for="id_key">Key:</label>
-                    <input type="text" name="key" maxlength="20" required id="id_key" placeholder="newsecret_123">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_key">Create a unique key</label>
+                    <input type="text" name="key" maxlength="20" required id="id_key" placeholder="e.g., mysecret_123">
                 </div>
-                <div>
-                    <label for="id_data">Data:</label>
-                    <textarea name="data" cols="40" rows="10" id="id_data"></textarea>
+                
+                <div class="form-group">
+                    <label for="id_data">Your data</label>
+                    <textarea name="data" id="id_data" placeholder="Paste your text here..."></textarea>
                 </div>
-                <div>
-                    <label for="id_file">File:</label>
-                    <input type="file" name="file" id="id_file">
+                
+                <div class="form-group">
+                    <label>Attach a file (optional)</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-label">
+                            <span class="file-icon"></span>
+                            <span id="file-label">Choose a file</span>
+                            <input type="file" name="file" id="id_file">
+                        </label>
+                    </div>
+                    <div id="file-name" class="file-name"></div>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit" class="btn">Create Paste</button>
             </form>
         </div>
     </div>
-</body>
 
+    <a href="/" class="back-link">
+        <span class="back-icon"></span>
+        Back to Home
+    </a>
+
+    <div class="footer">
+        <p>Share text and files between devices with zero hassle</p>
+    </div>
+
+    <script>
+        // Show selected filename when a file is chosen
+        document.getElementById('id_file').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.getElementById('file-label').textContent = fileName.length > 25 ? fileName.substring(0, 22) + '...' : fileName;
+            document.getElementById('file-name').textContent = e.target.files[0] ? `Selected: ${fileName}` : '';
+        });
+    </script>
+</body>
 </html>
