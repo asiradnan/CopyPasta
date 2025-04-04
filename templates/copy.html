@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="icon" href="{% static 'paste.png' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <meta name="description" content="Paste easily from one device and copy from another. Share files easily without login or signup. Free file and data sharing website.">
+    <meta name="description"
+        content="Paste easily from one device and copy from another. Share files easily without login or signup. Free file and data sharing website.">
     <title>CopyPasta - Copy</title>
     <style>
         :root {
@@ -171,13 +173,14 @@
             .header {
                 margin: 20px 0;
             }
-            
+
             .card {
                 border-radius: 10px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo">CopyPasta</div>
@@ -189,20 +192,20 @@
         </div>
         <div class="card-body">
             {% if error %}
-                <div class="alert alert-danger">
-                    {{ error }}
-                </div>
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
             {% else %}
-                <div class="alert alert-success">
-                    Found the pasted items!
-                </div>
-                <div class="data-label">Your data:</div>
-                <div class="data-display">
-                    <pre>{{ data }}</pre>
-                </div>
-                {% if file %}
-                <p>Your file is: <a href="{{ file.url }}" target="_blank" class="file-link">{{ file }}</a></p>
-                {% endif %}
+            <div class="alert alert-success">
+                Found the pasted items!
+            </div>
+            <div class="data-label">Your data:</div>
+            <div class="data-display">
+                <pre>{{ data }}</pre>
+            </div>
+            {% if file %}
+            <p style="margin-bottom: 16px;">Your file is: <a href="{{ file.url }}" target="_blank" class="file-link">{{file }}</a></p>
+            {% endif %}
             {% endif %}
             <a href="/" class="btn">Go Back to Home</a>
         </div>
@@ -212,4 +215,5 @@
         <p>Quickly share text between devices • No registration needed</p>
     </div>
 </body>
+
 </html>
