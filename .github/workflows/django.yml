@@ -31,6 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
+      url: https://copypasta.asiradnan.com
     steps:
     - name: Deploy to VPS via SSH
       uses: appleboy/ssh-action@master
