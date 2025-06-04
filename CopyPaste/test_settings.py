@@ -1,5 +1,7 @@
 from CopyPaste.settings import *
 
+SECRET_KEY = 'test_secret_key'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
