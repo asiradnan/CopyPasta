@@ -25,10 +25,8 @@ def paste(request):
         if form.is_valid():
             x = form.save(commit=False)
             x.save()
-            print("Here")
             return render(request, "pasted.html",{"key":key})
         else:
-            print(form)
             return render(request, "paste.html", {"form":form})
     form = MainForm()
     return render(request, "paste.html", {"form":form})
