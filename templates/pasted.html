@@ -41,16 +41,7 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Your key for the data is:</label>
                     <div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-4 text-center">
                         <div class="text-lg sm:text-xl font-bold text-gray-800 break-all select-all cursor-pointer" 
-                             onclick="navigator.clipboard.writeText('{{ key }}').then(() => {
-                                 const toast = document.createElement('div');
-                                 toast.className = 'fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
-                                 toast.textContent = 'Key copied to clipboard!';
-                                 document.body.appendChild(toast);
-                                 setTimeout(() => {
-                                     toast.style.opacity = '0';
-                                     setTimeout(() => document.body.removeChild(toast), 300);
-                                 }, 2000);
-                             })"
+                             onclick="copyToClipboard('{{ key }}')"
                              title="Click on the key to copy">
                             {{ key }}
                         </div>
@@ -137,6 +128,119 @@
 </div>
 
 <script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showMessage('Key copied to clipboard!', 'success');
+        }).catch(() => {
+            showMessage('Failed to copy key to clipboard', 'error');
+        });
+    }
+
+    function showMessage(text, type = 'info') {
+        // Create messages container if it doesn't exist
+        let container = document.getElementById('messages-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'messages-container';
+            container.className = 'fixed top-4 right-4 z-50 space-y-2 max-w-sm w-full';
+            document.body.appendChild(container);
+        }
+
+        // Create message element
+        const message = document.createElement('div');
+        const messageId = Date.now();
+        
+        // Set message classes based on type
+        let bgClass, borderClass, textClass, iconColor, iconPath;
+        
+        switch(type) {
+            case 'success':
+                bgClass = 'bg-green-100';
+                borderClass = 'border-green-300';
+                textClass = 'text-green-800';
+                iconColor = 'text-green-600';
+                iconPath = 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z';
+                break;
+            case 'error':
+                bgClass = 'bg-red-100';
+                borderClass = 'border-red-300';
+                textClass = 'text-red-800';
+                iconColor = 'text-red-600';
+                iconPath = 'M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z';
+                break;
+            case 'warning':
+                bgClass = 'bg-yellow-100';
+                borderClass = 'border-yellow-300';
+                textClass = 'text-yellow-800';
+                iconColor = 'text-yellow-600';
+                iconPath = 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z';
+                break;
+            default: // info
+                bgClass = 'bg-blue-100';
+                borderClass = 'border-blue-300';
+                textClass = 'text-blue-800';
+                iconColor = 'text-blue-600';
+                iconPath = 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z';
+        }
+
+        message.className = `message-alert message-enter ${bgClass} border ${borderClass} ${textClass} px-4 py-3 rounded-xl shadow-lg font-medium flex items-start gap-3`;
+        message.setAttribute('data-message-id', messageId);
+        
+        message.innerHTML = `
+            <div class="flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 ${iconColor}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${iconPath}"></path>
+                </svg>
+            </div>
+            <div class="flex-1 text-sm">${text}</div>
+            <button onclick="dismissMessage(this)" class="flex-shrink-0 ml-2 ${iconColor} hover:opacity-80 transition-opacity duration-200">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        `;
+
+        // Add to container
+        container.appendChild(message);
+
+        // Trigger entrance animation
+        setTimeout(() => {
+            message.classList.remove('message-enter');
+            message.classList.add('message-enter-active');
+        }, 10);
+
+              // Auto-dismiss after 3 seconds
+        setTimeout(() => {
+            const button = message.querySelector('button');
+            if (button && message.parentNode) {
+                dismissMessage(button);
+            }
+        }, 3000);
+    }
+
+    function dismissMessage(button) {
+        const message = button.closest('.message-alert');
+        
+        if (message) {
+            // Add exit animation
+            message.classList.remove('message-enter-active');
+            message.classList.add('message-exit-active');
+            
+            // Remove from DOM after animation
+            setTimeout(() => {
+                if (message.parentNode) {
+                    message.remove();
+                }
+                
+                // Remove container if no messages left
+                const container = document.getElementById('messages-container');
+                if (container && container.children.length === 0) {
+                    container.remove();
+                }
+            }, 300);
+        }
+    }
+
     function confirmDelete() {
         document.getElementById('deleteModal').classList.remove('hidden');
     }
