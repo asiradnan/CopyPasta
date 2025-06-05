@@ -1,288 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
-    {% load static %}
-    <link rel="icon" href="{% static 'paste.png' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <meta name="description" content="Paste easily from one device and copy from another. Share files easily without login or signup. Free file and data sharing website.">
-    <title>CopyPasta</title>
-    <style>
-        :root {
-            --primary: #6C63FF;
-            --primary-dark: #5A52D9;
-            --primary-light: #E9E8FF;
-            --white: #FFFFFF;
-            --text: #2D3748;
-            --gray-light: #F7FAFC;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-            --radius: 12px;
-        }
+{% extends "base.html" %}
+{% block title %}Copy Pasta{% endblock %}
+{% block content %}
+<div class="font-inter text-gray-800 flex flex-col items-center justify-center flex-grow px-4 py-8 sm:px-6 lg:px-8">
+    
+    <!-- Header Section -->
+    <header class="text-center mb-8 sm:mb-12 lg:mb-16">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tight mb-3 sm:mb-4">
+            CopyPasta
+        </h1>
+        <p class="text-sm sm:text-base lg:text-lg text-gray-800 opacity-80 max-w-xs sm:max-w-md lg:max-w-lg mx-auto leading-relaxed">
+            Share text and data between devices with zero hassle
+        </p>
+    </header>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Main Content Section -->
+    <section class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl space-y-4 sm:space-y-6">
+        
+        <!-- Create New Paste Card -->
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-xl w-full overflow-hidden transition-all duration-300 hover:-translate-y-1">
+            <div class="p-4 sm:p-6">
+                <a href="/paste" class="block" aria-label="Create a new paste">
+                    <button class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl text-base sm:text-lg flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-30">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <span>Create New Paste</span>
+                    </button>
+                </a>
+            </div>
+        </article>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F6F0FF 0%, #E9E8FF 100%);
-            min-height: 100vh;
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .header {
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-size: 16px;
-            color: var(--text);
-            opacity: 0.8;
-            max-width: 400px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 500px;
-            overflow: hidden;
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            padding: 20px;
-            background-color: var(--primary-light);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        .card-body {
-            padding: 24px;
-        }
-
-        form {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .input-group {
-            position: relative;
-            flex: 1;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #E2E8F0;
-            border-radius: var(--radius);
-            font-size: 16px;
-            color: var(--text);
-            background-color: var(--gray-light);
-            transition: all 0.2s ease;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: var(--white);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
-        }
-
-        input::placeholder {
-            color: #A0AEC0;
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: var(--radius);
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-large {
-            width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .paste-icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background-color: var(--white);
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'%3E%3C/path%3E%3C/svg%3E");
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'%3E%3C/path%3E%3C/svg%3E");
-            mask-size: contain;
-            -webkit-mask-size: contain;
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-        }
-
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text);
-            opacity: 0.7;
-        }
-
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer a:hover {
-            color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .github-icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-color: currentColor;
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
-            mask-size: contain;
-            -webkit-mask-size: contain;
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-        }
-
-        /* Mobile styles */
-        @media (max-width: 600px) {
-            .header {
-                margin: 20px 0;
-            }
+        <!-- Find Existing Content Card -->
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-xl w-full overflow-hidden transition-all duration-300 hover:-translate-y-1">
+            <!-- Card Header -->
+            <header class="px-4 sm:px-5 py-4 sm:py-5 bg-primary-light border-b border-gray-100">
+                <h2 class="text-base sm:text-lg font-semibold text-primary-dark">
+                    Find existing content
+                </h2>
+            </header>
             
-            .logo {
-                font-size: 32px;
-            }
-            
-            .card {
-                border-radius: 10px;
-            }
-            
-            form {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    {% load static %}
-    <div class="header">
-        <div class="logo">CopyPasta</div>
-        <p class="tagline">Share text and data between devices with zero hassle</p>
-    </div>
-
-
-
-     <div class="card">
-        <div class="card-body">
-            <a href="/paste" style="text-decoration: none;">
-                <button class="btn btn-large">
-                    <span class="paste-icon"></span>
-                    Create New Paste
-                </button>
-            </a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">Find existing content</h2>
-        </div>
-        <div class="card-body">
-            <form method="post" action="/copy">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" name="key" placeholder="Enter key" required>
-                </div>
-                <button type="submit" class="btn">Find</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">Edit existing data</h2>
-        </div>
-        <div class="card-body">
-            <form method="post" action="/preEdit">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" name="key" placeholder="Enter key" required>
-                </div>
-                <button type="submit" class="btn">Edit</button>
-            </form>
-        </div>
-    </div> -->
-
-   
-
-    <div class="footer">
-        <a href="https://github.com/asiradnan/CopyPaste" target="_blank" rel="noopener noreferrer">
-            <span class="github-icon"></span>
-            View on GitHub
-        </a>
-    </div>
-
-</body>
-</html>
+            <!-- Card Content -->
+            <div class="p-4 sm:p-6">
+                <form method="post" action="/copy" class="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:gap-3" role="search">
+                    {% csrf_token %}
+                    
+                    <!-- Input Field -->
+                    <div class="relative flex-1 w-full">
+                        <label for="key-input" class="sr-only">Enter key to find content</label>
+                        <input 
+                            id="key-input"
+                            type="text" 
+                            name="key" 
+                            placeholder="Enter key" 
+                            required
+                            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl text-sm sm:text-base text-gray-800 bg-gray-50 transition-all duration-200 focus:outline-none focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary focus:ring-opacity-20 placeholder-gray-400"
+                            autocomplete="off"
+                        >
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl text-sm sm:text-base transition-all duration-200 hover:-translate-y-0.5 w-full sm:w-auto whitespace-nowrap focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-30 flex items-center justify-center gap-2"
+                    >
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span>Find</span>
+                    </button>
+                </form>
+            </div>
+        </article>
+    </section>
+</div>
+{% endblock %}
