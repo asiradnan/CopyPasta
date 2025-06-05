@@ -1,223 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="icon" href="{% static 'paste.png' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <meta name="description" content="Paste easily from one device and copy from another. Share files easily without login or signup. Free file and data sharing website.">
-    <title>CopyPasta - Pasted</title>
-    <style>
-        :root {
-            --primary: #6C63FF;
-            --primary-dark: #5A52D9;
-            --primary-light: #E9E8FF;
-            --white: #FFFFFF;
-            --text: #2D3748;
-            --gray-light: #F7FAFC;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-            --radius: 12px;
-            --highlight: #F6E05E;
-            --highlight-border: #ECC94B;
-        }
+{% extends "base.html" %}
+{% load static %}
+{% block title %}CopyPasta - Pasted{% endblock %}
+{% block content %}
+<div class="font-inter text-gray-800 flex flex-col items-center justify-center flex-grow px-4 py-4 sm:py-6 lg:py-8 sm:px-6 lg:px-8">
+    
+    <!-- Header Section -->
+    <header class="text-center mb-6 sm:mb-8 lg:mb-10 flex-shrink-0">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary tracking-tight mb-3 sm:mb-4">
+            CopyPasta
+        </h1>
+        <p class="text-sm sm:text-base text-gray-800 opacity-80 max-w-md mx-auto leading-relaxed">
+            Your paste has been created successfully
+        </p>
+    </header>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #F6F0FF 0%, #E9E8FF 100%);
-            min-height: 100vh;
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .header {
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 500px;
-            overflow: hidden;
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            padding: 20px;
-            background-color: var(--primary-light);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        .card-body {
-            padding: 24px;
-        }
-
-        .alert {
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            padding: 12px;
-            border-radius: var(--radius);
-            margin-bottom: 16px;
-        }
-
-        .alert-success {
-            background-color: #C6F6D5;
-            color: #2F855A;
-        }
-
-        .data-label {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text);
-            margin: 12px 0;
-        }
-
-        .key-display {
-            text-align: center;
-            font-size: 20px;
-            background: var(--highlight);
-            padding: 16px;
-            border-radius: var(--radius);
-            border: 1px solid var(--highlight-border);
-            margin: 16px 0;
-            color: var(--text);
-            font-weight: 600;
-            word-wrap: break-word;
-        }
-
-        .btn {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: var(--radius);
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text);
-            opacity: 0.7;
-        }
-
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer a:hover {
-            color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .github-icon {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            background-color: currentColor;
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
-            mask-size: contain;
-            -webkit-mask-size: contain;
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-        }
-
-        /* Mobile styles */
-        @media (max-width: 600px) {
-            .header {
-                margin: 20px 0;
-            }
+    <!-- Main Content Section -->
+    <section class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+        
+        <!-- Success Card -->
+        <article class="bg-white rounded-xl shadow-lg hover:shadow-xl w-full overflow-hidden transition-all duration-300 hover:-translate-y-1 mb-6">
+            <!-- Card Header -->
+            <header class="px-4 sm:px-5 py-4 sm:py-5 bg-primary-light border-b border-gray-100">
+                <h2 class="text-base sm:text-lg font-semibold text-primary-dark flex items-center gap-2">
+                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Paste Created Successfully!
+                </h2>
+            </header>
             
-            .logo {
-                font-size: 32px;
-            }
-            
-            .card {
-                border-radius: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <div class="logo">CopyPasta</div>
-    </div>
+            <!-- Card Content -->
+            <div class="p-4 sm:p-6">
+                <!-- Success Message -->
+                <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-xl mb-6 text-center font-medium">
+                    Pasted Successfully!
+                </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">Paste Created</h2>
+                <!-- Key Display -->
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Your key for the data is:</label>
+                    <div class="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-4 text-center">
+                        <div class="text-lg sm:text-xl font-bold text-gray-800 break-all select-all cursor-pointer" 
+                             onclick="navigator.clipboard.writeText('{{ key }}').then(() => {
+                                 const toast = document.createElement('div');
+                                 toast.className = 'fixed top-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+                                 toast.textContent = 'Key copied to clipboard!';
+                                 document.body.appendChild(toast);
+                                 setTimeout(() => {
+                                     toast.style.opacity = '0';
+                                     setTimeout(() => document.body.removeChild(toast), 300);
+                                 }, 2000);
+                             })"
+                             title="Click on the key to copy">
+                            {{ key }}
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-600 mt-3">
+                            <span class="block">Click on the key to copy</span>
+                            <span class="block mt-1">Share this key to access your data from any device</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col gap-3">
+                    <!-- Primary Actions Row -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="/" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 sm:py-3 px-4 rounded-xl text-center transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-30 flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                            Go Back to Home
+                        </a>
+                        
+                        <form method="post" action="/copy" class="flex-1">
+                            {% csrf_token %}
+                            <input type="hidden" name="key" value="{{ key }}">
+                            <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 sm:py-3 px-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-30 flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                Edit Paste
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Delete Button Row -->
+                    <div class="border-t border-gray-200 pt-3">
+                        <button 
+                            onclick="confirmDelete()"
+                            class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-4 rounded-xl text-center transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-30 flex items-center justify-center gap-2"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H8a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                            Delete Paste
+                        </button>
+                    </div>
+                    
+                    <!-- Hidden Delete Form -->
+                    <form id="deleteForm" method="post" action="{% url 'delete' pk=object.pk %}" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+        <div class="flex items-center gap-3 mb-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold text-gray-800">Delete Paste</h3>
         </div>
-        <div class="card-body">
-            <div class="alert alert-success">
-                Pasted Successfully!
-            </div>
-            <div class="data-label">Your key for the data is:</div>
-            <div class="key-display">
-                {{ key }}
-            </div>
-            <p style="margin-bottom: 16px; font-size: 14px;">Use this key to access your data from any device</p>
-            <a href="/" class="btn">Go Back to Home</a>
+        <p class="text-gray-600 mb-6">
+            Are you sure you want to delete this paste? This action cannot be undone and all data will be permanently lost.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+            <button 
+                onclick="closeDeleteModal()"
+                class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-30"
+            >
+                Cancel
+            </button>
+            <button 
+                onclick="deletePaste()"
+                class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-30"
+            >
+                Delete
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="footer">
-        <a href="https://github.com/asiradnan/CopyPaste" target="_blank" rel="noopener noreferrer">
-            <span class="github-icon"></span>
-            View on GitHub
-        </a>
-    </div>
-</body>
-</html>
+<script>
+    function confirmDelete() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    function deletePaste() {
+        document.getElementById('deleteForm').submit();
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('deleteModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeDeleteModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDeleteModal();
+        }
+    });
+</script>
+{% endblock %}

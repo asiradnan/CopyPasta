@@ -1,6 +1,7 @@
-from django.shortcuts import  render
+from django.shortcuts import  render, redirect
 from .forms import MainForm
 from .models import MainModel
+from django.contrib import messages
 
 def home(request):
     return render(request, "home.html")
@@ -21,7 +22,7 @@ def paste(request):
         if form.is_valid():
             x = form.save(commit=False)
             x.save()
-            return render(request, "pasted.html",{"key":key})
+            return render(request, "pasted.html",{"key":key,"object":x})
         else:
             return render(request, "paste.html", {"form":form})
     form = MainForm()
@@ -38,3 +39,13 @@ def edit(request, pk):
     else:
         form = MainForm(instance=obj)
     return render(request, "paste.html", {"form":form, "object":obj})
+
+def delete(request, pk):
+    if request.method == "POST":
+        obj = MainModel.objects.get(pk=pk)
+        if obj is None:
+            messages.error(request, "Data not found")
+            return render(request, "delete.html")
+        obj.delete()
+        messages.success(request, "Data deleted successfully")
+    return redirect("home")

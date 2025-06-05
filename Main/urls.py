@@ -5,4 +5,5 @@ urlpatterns = [
     path("copy",views.copy,name="copy"),
     path("<str:pk>/edit",views.edit,name="edit"),
     path("paste",views.paste,name="paste"),
+    path("<str:pk>/delete", views.delete, name="delete"),
 ]
