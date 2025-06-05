@@ -12,9 +12,7 @@ def copy(request):
         key = request.POST.get("key")
         try:
             x = MainModel.objects.get(key=key)
-            if (x.file):
-                return render(request, "copy.html", {"data":x.data,"file":x.file})
-            return render(request,"copy.html",{"data":x.data})
+            return render(request,"copy.html", {"object":x})
         except:
             return render(request, "copy.html", {"error":"Data not found"})
 
@@ -32,26 +30,13 @@ def paste(request):
     return render(request, "paste.html", {"form":form})
 
 
-def preEdit(request):
+def edit(request, pk):
+    obj = MainModel.objects.get(pk=pk)
     if request.method == "POST":
-        key = request.POST.get("key")
-        try:
-            x = get_object_or_404(MainModel, key=key)
-            request.session['key'] = key 
-            return redirect(reverse('edit'))
-        except:
-            return render(request, "copy.html", {"error":"Data not found"})
-
-def edit(request):
-    obj = get_object_or_404(MainModel, key=request.session.get('key'))
-    if request.method == "POST":
-        key = request.POST.get("key")
-        form = MainForm(request.POST, request.FILES,instance=obj)
+        form = MainForm(request.POST, request.FILES, instance=obj)
         if form.is_valid():
-            x = form.save(commit=False)
-            x.save()
-            return render(request, "pasted.html",{"key":key})
-        else:
-            return render(request, "paste.html", {"form":form})
-    form = MainForm(instance=obj)
+            form.save()
+            return render(request,"copy.html", {"object":obj})
+    else:
+        form = MainForm(instance=obj)
     return render(request, "edit.html", {"form":form})

@@ -2,3 +2,5 @@
 /copypastaenv/
 /mediafiles
 command_for_test.txt
+db.sqlite3
+

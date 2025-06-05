@@ -232,9 +232,22 @@
         <p class="tagline">Share text and data between devices with zero hassle</p>
     </div>
 
+
+
+     <div class="card">
+        <div class="card-body">
+            <a href="/paste" style="text-decoration: none;">
+                <button class="btn btn-large">
+                    <span class="paste-icon"></span>
+                    Create New Paste
+                </button>
+            </a>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Copy from shared data</h2>
+            <h2 class="card-title">Find existing content</h2>
         </div>
         <div class="card-body">
             <form method="post" action="/copy">
@@ -242,12 +255,12 @@
                 <div class="input-group">
                     <input type="text" name="key" placeholder="Enter key" required>
                 </div>
-                <button type="submit" class="btn">Copy</button>
+                <button type="submit" class="btn">Find</button>
             </form>
         </div>
     </div>
 
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header">
             <h2 class="card-title">Edit existing data</h2>
         </div>
@@ -260,18 +273,9 @@
                 <button type="submit" class="btn">Edit</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
-    <div class="card">
-        <div class="card-body">
-            <a href="/paste" style="text-decoration: none;">
-                <button class="btn btn-large">
-                    <span class="paste-icon"></span>
-                    Create New Paste
-                </button>
-            </a>
-        </div>
-    </div>
+   
 
     <div class="footer">
         <a href="https://github.com/asiradnan/CopyPaste" target="_blank" rel="noopener noreferrer">

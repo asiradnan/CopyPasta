@@ -229,13 +229,14 @@
             </div>
             <div class="data-label">Your data:</div>
             <div class="data-display">
-                <pre>{{ data }}</pre>
+                <pre>{{ object.data }}</pre>
             </div>
-            {% if file %}
-            <p style="margin-bottom: 16px;">Your file is: <a href="{{ file.url }}" target="_blank" class="file-link">{{file }}</a></p>
+            {% if object.file %}
+            <p style="margin-bottom: 16px;">Your file is: <a href="{{ object.file.url }}" target="_blank" class="file-link">{{ object.file }}</a></p>
             {% endif %}
             {% endif %}
-            <a href="/" class="btn">Go Back to Home</a>
+            <a href="/" class="btn">Go Back to Home</a> 
+            <a href="{% url 'edit' pk=object.pk %}" class="btn">Edit</a>
         </div>
     </div>
 
