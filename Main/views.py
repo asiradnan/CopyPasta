@@ -1,8 +1,6 @@
-from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse
+from django.shortcuts import  render
 from .forms import MainForm
 from .models import MainModel
-
 
 def home(request):
     return render(request, "home.html")
@@ -39,4 +37,4 @@ def edit(request, pk):
             return render(request,"copy.html", {"object":obj})
     else:
         form = MainForm(instance=obj)
-    return render(request, "edit.html", {"form":form})
+    return render(request, "paste.html", {"form":form, "object":obj})
