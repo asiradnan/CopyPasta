@@ -81,6 +81,3 @@ STORAGES = {
         "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
     },
 }
-
-RATELIMIT_IP_META_KEY = 'HTTP_X_FORWARDED_FOR'
-
