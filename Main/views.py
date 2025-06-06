@@ -2,6 +2,7 @@ from django.shortcuts import  render, redirect
 from .forms import MainForm
 from .models import MainModel
 from django.contrib import messages
+from django_ratelimit.decorators import ratelimit
 
 def home(request):
     return render(request, "home.html")
@@ -15,6 +16,7 @@ def copy(request):
         except:
             return render(request, "copy.html", {"error":"Data not found"})
 
+@ratelimit(key="ip", rate="10/m")
 def paste(request):
     if request.method == "POST":
         key = request.POST.get("key")
@@ -28,7 +30,7 @@ def paste(request):
     form = MainForm()
     return render(request, "paste.html", {"form":form})
 
-
+@ratelimit(key="ip", rate="10/m")
 def edit(request, pk):
     obj = MainModel.objects.get(pk=pk)
     if request.method == "POST":
