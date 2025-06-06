@@ -2,7 +2,6 @@ from django.shortcuts import  render, redirect
 from .forms import MainForm
 from .models import MainModel
 from django.contrib import messages
-from django_ratelimit.decorators import ratelimit
 
 def home(request):
     return render(request, "home.html")
