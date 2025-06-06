@@ -16,7 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Main',
 
-    'storages'
+    'storages',
+    'django_cleanup.apps.CleanupConfig',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
