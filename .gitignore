@@ -1,8 +1,7 @@
 .env
-/copypastaenv/
+/venv/
 /mediafiles
 command_for_test.txt
-db.sqlite3
 __pycache__/
 *.py[cod]
 
