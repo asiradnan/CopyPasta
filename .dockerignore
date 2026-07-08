@@ -1,0 +1,14 @@
+.git
+.github
+htmlcov/
+media/
+screenshots/
+venv/
+.env
+.coverage
+.gitignore
+command_for_test.txt
+LICENSE
+README.md
+__pycache__/
+*.pyc
