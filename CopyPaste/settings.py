@@ -9,7 +9,7 @@ SECRET_KEY = os.environ.get("secret_key")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["copypasta.asiradnan.com","www.copypasta.asiradnan.com","*"]
+ALLOWED_HOSTS = ["copypasta.asiradnan.com","www.copypasta.asiradnan.com","127.0.0.1","localhost"]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 INSTALLED_APPS = [
